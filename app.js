@@ -335,7 +335,21 @@ app.get("/api/bookbyid/:id", (req, res) => {
     });
 });
 
-
+//delete
+app.delete("/api/book/delete/:id", (req, res) => {
+  Book.deleteOne({_id:req.params.id})
+    .then((book) =>
+      res.status(200).json({
+        message: "success!",
+      })
+    )
+    .catch(() => {
+      res.status(400).json({
+        error: Error.message,
+        message: "probleme d'extraction ",
+      });
+    });
+});
 
 module.exports = app
 
